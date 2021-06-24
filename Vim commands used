@@ -1,0 +1,13 @@
+gvim <filename>
+-- inside yosys, use --- !gvim <filename>
+
+gvim <file1> -o <file2> ...                           //stack files one on top of another
+gvim -O <f1> <f2> ...                                 //stack files side by side
+
+Inside editor
+:se nu                        //show line number
+:syn off                      //turn off syntax (color coding is removed here)
+/<pattern>                    //search the file for <pattern>
+  --  TODO check how to go to next or prev difference
+  
+:g//                          //shows all instances of the <pattern> coming in the file
