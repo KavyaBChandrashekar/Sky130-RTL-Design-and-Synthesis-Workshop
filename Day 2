@@ -1,6 +1,10 @@
 Day 2
 
 Exploring the .lib file - what it contains, what is the significance
+PVT - Process, Voltage and Temp
+** tt means typical
+- for each cell, for combination of the inputs, there is a specific value for area, power and delay
+- wider cells have lesser delay but consume more area and power
 
 Hierarchical and flattened synthesis
 
@@ -9,3 +13,5 @@ synth -top <module>  vs synth -top <submodule>
   1. We have multiple instances of the same submodule in the top module. So just synth once and then replicate to save time and effort
   2. When we have a huge design, we can synthesize each submodule separately and get its more manageable netlist, and then stitch it together to get the top level netlist optimized.
   
+flattened netlist visualization shows the details of the internal logic cells used.
+hierarchical netlist only shows submodule names, not the internal logic.
