@@ -8,6 +8,14 @@ Inside editor
 :se nu                        //show line number
 :syn off                      //turn off syntax (color coding is removed here)
 /<pattern>                    //search the file for <pattern>
-  --  TODO check how to go to next or prev difference
+  --  TODO check how to go to next or prev occurance
   
-:g//                          //shows all instances of the <pattern> coming in the file
+:g//                          //shows all instances of the <pattern> occurring in the file
+
+When a file is already opened, to open a new file
+:sp <relativ or absolute path to the new file>
+
+Word search incremental -
+click on the word. 
+* takes you to next occurance
+# to previous
