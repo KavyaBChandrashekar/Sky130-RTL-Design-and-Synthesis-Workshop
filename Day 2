@@ -1,0 +1,11 @@
+Day 2
+
+Exploring the .lib file - what it contains, what is the significance
+
+Hierarchical and flattened synthesis
+
+synth -top <module>  vs synth -top <submodule>
+ -- we use submodule level synthesis when 
+  1. We have multiple instances of the same submodule in the top module. So just synth once and then replicate to save time and effort
+  2. When we have a huge design, we can synthesize each submodule separately and get its more manageable netlist, and then stitch it together to get the top level netlist optimized.
+  
