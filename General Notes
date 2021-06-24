@@ -20,8 +20,13 @@ gtkwave <VCD file>
 yosys
 read_verilog <design file>
 read_liberty -lib <.lib file>
-synth -top <design name>
-abc -liberty <design name>
-show                        // graphical representation of the netlist
-write_verilog -noattr <netlist file name>       //no attr removes all the extra lines and provides only those with std cells
+synth -top <design name>      //decide what part of the whole design you want to synthesize (can do the whole top module or indiv. submodules)
+abc -liberty <design name>    //linking design to library
+*optional for flattened netlist
+  flatten
+show                          // graphical representation of the netlist
+write_verilog -noattr <netlist file name.v>       //no attr removes all the extra lines and provides only those with std cells
+!gvim <the above given netlist file name.v>
+
+exit                          //exits yosys and goes back to shell
 
