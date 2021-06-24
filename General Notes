@@ -1,0 +1,26 @@
+General Notes for quick view on the 5-day Workshop
+
+Day 1:
+- Intro to general flow of simulation and synthesis
+- Remote server virtual machine to access the linux platform
+- Intro to iverilog simulator, gtkwave waveform viewer
+- Intro to yosys open source tool for synthesis
+- Intro to github and cloning and accessing the repositories
+- Labs to run iverilog for simulating good and bad designs and viewing waveforms
+- VCD dump
+- Labs to run yosys with std cell libraries imported from the github repos
+- Visualization of the netlist using dot files
+
+
+Commands:
+iverilog <rtl file> <testbench file>
+./a.out
+gtkwave <VCD file>
+
+yosys
+read_verilog <design file>
+read_liberty -lib <.lib file>
+synth -top <design name>
+abc -liberty <design name>
+show                        // graphical representation of the netlist
+
