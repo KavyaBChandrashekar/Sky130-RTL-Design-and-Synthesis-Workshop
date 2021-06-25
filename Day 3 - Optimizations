@@ -21,3 +21,19 @@ Constant propagation : If a D pin of async reset DFF is tied to 0, then Q = 0 al
                         After some retiming, let's say we could shift the logic so that the delay of LogicA is now 8ns and LogicB is 7ns. So, max freq would be 125MHz and 143MHz resp.
                         Now, the effective frequency can be improved to 125MHz. That's an increase in performance compared to 100MHz.
                         Here, we take advantage of the extra slack in clk in the second half of the ckt to retime the logic.
+                        
+
+Combinational logic optimization lab:
+
+for optimization, after synth - top <topmodule>, use the following command
+  opt_clean -purge
+  *removes all unused gates and logic
+
+y = a?b:0 == y = aANDb    ===> realized as an and2 gate
+y = a?1:b == a+a'b=a+b (law of disappearing opposites) == aORb
+    *OR gate realization involves NOR with stacked PMOSs. This is not good, as PMOS has lower mobility and to increase performance, we would then need really wide transistors and
+      hence consumes more area.   So, OR is realized using NAND with inverted a and b as inputs.
+      *Note: In yosys version 0.9, it is being realized using lpflow isolation cells with inputs A and SLEEP but doing an OR operation within all the same.
+      
+For multiple modules optimization, first flatten the netlist and then do opt_clean -purge  
+
