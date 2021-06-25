@@ -15,3 +15,20 @@ synth -top <module>  vs synth -top <submodule>
   
 flattened netlist visualization shows the details of the internal logic cells used.
 hierarchical netlist only shows submodule names, not the internal logic.
+
+
+Why FFs?
+Combi ckt has glitches due to gate delays. The longer the chain with more combi stages, higher the occurances of glitches.
+So we need a storage element to halt the unpredictable glitches and latch on and store the value at a specific time and not alter it until the next specific time. This is achieved by FFs.
+Data can come in at any interval. But it is 'sampled' only at the clock edge (pos or neg or both) and that sampled value is held until the next clock edge. There is no data change in between the clock edges.
+So putting the FFs in between combi ckts helps in minimizing glitch propagation and unpredictable undesired value changes.
+
+Async reset - reset is in the sensitivity list of always block. Will reset the q to 0 irrespective of the clock edge.
+Similar to above, async set - but this sets the q to 1 instead of 0.
+Sync reset - At the clock edge, if syncres = 1, then q = 0; else q = d. Basically, it is a mux of D and 0 with sel=syncres at the data pin of the DFF. Din = ~syncres.D
+
+Optimizations:
+Mult A by 2*x == nothing but A left shifted x times
+Mult A[2:0] by 9 == {A,000}+A = {A,A}
+
+**So, NO HARDWARE IS REQUIRED to synthesize and realize this. The synth -top for this operation shows "0 memories and gates". abc -liberty ... says that there is nothing to map since we need no gates.
