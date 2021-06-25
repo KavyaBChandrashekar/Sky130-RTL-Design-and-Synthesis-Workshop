@@ -21,6 +21,10 @@ yosys                         //invokes YOSys
 read_verilog <design file>
 read_liberty -lib <.lib file>
 synth -top <design name>      //decide what part of the whole design you want to synthesize (can do the whole top module or indiv. submodules)
+
+dfflibmap -liberty <path to lib file>
+   //use this while synthesizing seq ckts with DFFs.
+
    //*optional for flattened netlist
 flatten
    //*optional optimize
