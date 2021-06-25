@@ -1,0 +1,23 @@
+Optimization
+
+Combi:
+Constant propagation: if one of the inputs in the logic is tied to a constant, this can result in reduction of logic and simplification and optimization of final expression.
+Boolean logic reduction : Large boolean logics can be reduced with expressions or using K-maps to get minimized logic for optimization.
+
+Sequential:
+Constant propagation : If a D pin of async reset DFF is tied to 0, then Q = 0 always, irresp of clk or asyncres. So, this FF can be removed in the optimization and the combi logic
+                        that is fed by this can also be reduced since one of the inputs (that is Q) is always a sequential constant 0.
+
+-State optimization   //optimize unused states
+-Cloning              //physical aware ckts. When logics with FFs are placed far away and hence there would be large routing. Let's say from A to B and C.
+                        Now, A has large positive slack. So it can easily meet timing constraints. So, now we can clone A and keep that nearer to B and C. So, the new timing
+                        would now be only from new A to B, and new A to C.
+                        *But this would come at a price of extra area for cloned logic.
+-Retiming             //method to improve performance
+                        //Here, let's say there is FF0 --> LogicA --> FF1 --> LogicB --> FF2
+                        Now, say LogicA has a delay of 10ns and LogicB has a delay of 5ns. Considering the clk-q delay and Tsu negligible, the max freq for the first half of the
+                        above ckt (wtih LogicA) is 100MHz; for the second half (with LogicB) it is 200MHz. Overall, we can only operate at the minimum of all, i.e, 100MHz.
+                        So, in retiming, we try to shift some of the logic from LogicA to LogicB, so as to even out the delays of both the parts as much as possible.
+                        After some retiming, let's say we could shift the logic so that the delay of LogicA is now 8ns and LogicB is 7ns. So, max freq would be 125MHz and 143MHz resp.
+                        Now, the effective frequency can be improved to 125MHz. That's an increase in performance compared to 100MHz.
+                        Here, we take advantage of the extra slack in clk in the second half of the ckt to retime the logic.
