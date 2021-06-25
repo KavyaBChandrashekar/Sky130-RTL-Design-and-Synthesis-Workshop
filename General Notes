@@ -17,15 +17,15 @@ iverilog <rtl file> <testbench file>
 ./a.out
 gtkwave <VCD file>
 
-yosys
+yosys                         //invokes YOSys
 read_verilog <design file>
 read_liberty -lib <.lib file>
 synth -top <design name>      //decide what part of the whole design you want to synthesize (can do the whole top module or indiv. submodules)
+   //*optional for flattened netlist
+flatten
+   //*optional optimize
+opt_clean -purge              //for optimization. For mult modules, first flatten and then do opt_clean...
 abc -liberty <design name>    //linking design to library
-*optional for flattened netlist
-  flatten
-*optional optimize
- opt_clean -purge             //for optimization. For mult modules, first flatten and then do opt_clean...
 show                          // graphical representation of the netlist
 write_verilog -noattr <netlist file name.v>       //no attr removes all the extra lines and provides only those with std cells
 !gvim <the above given netlist file name.v>
