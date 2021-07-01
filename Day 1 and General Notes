@@ -17,6 +17,7 @@ iverilog <rtl file> <testbench file>
 ./a.out
 gtkwave <VCD file>
 
+Synthesis:
 yosys                         //invokes YOSys
 read_verilog <design file>
 read_liberty -lib <.lib file>
@@ -27,8 +28,10 @@ dfflibmap -liberty <path to lib file>
 
    //*optional for flattened netlist
 flatten
+
    //*optional optimize
 opt_clean -purge              //for optimization. For mult modules, first flatten and then do opt_clean...
+
 abc -liberty <design name>    //linking design to library
 show                          // graphical representation of the netlist
 write_verilog -noattr <netlist file name.v>       //no attr removes all the extra lines and provides only those with std cells
